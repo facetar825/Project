@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bjp3hnt0vdsdj"]
+
+[ext_resource type="Script" uid="uid://gvifrqpdox82" path="res://UI/3d_progress.gd" id="1_6cbdv"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0i5si"]
+viewport_path = NodePath("SubViewport")
+
+[node name="3dProgress" type="Node3D" unique_id=1860586944]
+script = ExtResource("1_6cbdv")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1091455915]
+transparent_bg = true
+size = Vector2i(262, 27)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport" unique_id=1189321972]
+offset_right = 261.0
+offset_bottom = 27.0
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=771309314]
+billboard = 1
+texture = SubResource("ViewportTexture_0i5si")

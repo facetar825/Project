@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cas6msakokvcw"]
+
+[ext_resource type="Script" uid="uid://dev705f3h61us" path="res://UI/pause_menu.gd" id="1_ltd3m"]
+
+[node name="PauseMenu" type="Control" unique_id=664724262]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ltd3m")
+
+[node name="Panel" type="Panel" parent="." unique_id=1181929965]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 116.0
+offset_right = 354.0
+offset_bottom = 496.0
+
+[node name="ResolutionOption" type="OptionButton" parent="Panel" unique_id=1344458712]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 11.0
+offset_right = 233.0
+offset_bottom = 31.0
+
+[node name="ShadowOption" type="OptionButton" parent="Panel" unique_id=1270360787]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 331.0
+offset_right = 233.0
+offset_bottom = 351.0
+
+[node name="LightOption" type="OptionButton" parent="Panel" unique_id=653639304]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 285.0
+offset_right = 233.0
+offset_bottom = 305.0
+
+[node name="VolumeSlider" type="HSlider" parent="Panel" unique_id=1809548462]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 225.0
+offset_right = 225.0
+offset_bottom = 241.0
+
+[node name="DisplayModeOption" type="OptionButton" parent="Panel" unique_id=1746995248]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 101.0
+offset_right = 233.0
+offset_bottom = 154.0
