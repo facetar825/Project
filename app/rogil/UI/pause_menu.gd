@@ -1,10 +1,19 @@
 extends Control
 
-@onready var resolution_option = $Panel/ResolutionOption    # OptionButton
-@onready var shadow_option = $Panel/ShadowOption            # OptionButton
-@onready var light_option = $Panel/LightOption              # OptionButton
-@onready var volume_slider = $Panel/VolumeSlider            # HSlider (не OptionButton!)
-@onready var display_mode_option = $Panel/DisplayModeOption # OptionButton
+@onready var resolution_option = $Panel/ResolutionOption
+@onready var shadow_option = $Panel/ShadowOption
+@onready var light_option = $Panel/LightOption
+@onready var volume_slider = $Panel/VolumeSlider
+@onready var display_mode_option = $Panel/DisplayModeOption
+@onready var sensitivity_slider = $Panel/SensitivitySlider    # HSlider для чувствительности
+@onready var sensitivity_label = $Panel/SensitivityValue      # Label для отображения значения
+
+var resolution_map = {
+	"1920x1080": 0,
+	"1600x900": 1,
+	"1366x768": 2,
+	"1280x720": 3
+}
 
 func _ready() -> void:
 	# Заполняем списки
@@ -26,6 +35,16 @@ func _ready() -> void:
 	display_mode_option.add_item("Fullscreen")
 	display_mode_option.add_item("Borderless")
 
+	# Настройка слайдера громкости
+	volume_slider.min_value = 0.0
+	volume_slider.max_value = 1.0
+	volume_slider.step = 0.01
+
+	# Настройка слайдера чувствительности
+	sensitivity_slider.min_value = 0.1
+	sensitivity_slider.max_value = 3.0
+	sensitivity_slider.step = 0.05
+
 	# Загружаем текущие настройки в виджеты
 	_update_widgets()
 
@@ -35,17 +54,15 @@ func _ready() -> void:
 	light_option.item_selected.connect(_on_light_changed)
 	volume_slider.value_changed.connect(_on_volume_changed)
 	display_mode_option.item_selected.connect(_on_display_mode_changed)
+	sensitivity_slider.value_changed.connect(_on_sensitivity_changed)
 
 func _update_widgets() -> void:
-	# Разрешение - ищем по тексту
+	# Разрешение
 	var res_str = str(SettingsManager.resolution.x) + "x" + str(SettingsManager.resolution.y)
-	var res_index = -1
-	for i in resolution_option.item_count:
-		if resolution_option.get_item_text(i) == res_str:
-			res_index = i
-			break
-	if res_index != -1:
-		resolution_option.select(res_index)
+	if resolution_map.has(res_str):
+		resolution_option.select(resolution_map[res_str])
+	else:
+		resolution_option.select(0)
 
 	# Качество теней
 	shadow_option.select(SettingsManager.shadow_quality)
@@ -58,6 +75,16 @@ func _update_widgets() -> void:
 
 	# Режим экрана
 	display_mode_option.select(SettingsManager.display_mode)
+
+	# Чувствительность мыши
+	sensitivity_slider.value = SettingsManager.mouse_sensitivity
+	_update_sensitivity_label()
+
+func _update_sensitivity_label() -> void:
+	if sensitivity_label:
+		var percent = sensitivity_slider.value / 3.0 * 100
+		sensitivity_label.text = str(round(percent)) + "%"
+
 # ---------- Обработчики изменений ----------
 func _on_resolution_changed(index: int) -> void:
 	var text = resolution_option.get_item_text(index)
@@ -77,3 +104,7 @@ func _on_volume_changed(value: float) -> void:
 
 func _on_display_mode_changed(index: int) -> void:
 	SettingsManager.set_display_mode(index)
+
+func _on_sensitivity_changed(value: float) -> void:
+	SettingsManager.set_mouse_sensitivity(value)
+	_update_sensitivity_label()
