@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://cvwdntwr0irl3"]
 
-[ext_resource type="Script" uid="uid://bjuq3dtt5sqhh" path="res://Script/plaeyr.gd" id="1_rolsr"]
+[ext_resource type="Script" uid="uid://bjuq3dtt5sqhh" path="res://Script/Player.gd" id="1_rolsr"]
+[ext_resource type="PackedScene" uid="uid://bjp3hnt0vdsdj" path="res://UI/3d_progress.tscn" id="3_jvxg0"]
+[ext_resource type="PackedScene" uid="uid://cas6msakokvcw" path="res://UI/pause_menu.tscn" id="3_mud5u"]
 [ext_resource type="AnimationLibrary" uid="uid://dxkgobfc23m6v" path="res://anim/Walking.fbx" id="5_3hm83"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xg0p8"]
@@ -334,7 +336,7 @@ radius = 6.0
 
 [sub_resource type="Theme" id="Theme_obvhc"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" unique_id=750457174 groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=750457174 groups=["player"]]
 script = ExtResource("1_rolsr")
 speed = 20
 speed_attack = 2.0
@@ -589,9 +591,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3479004, 0)
 shape = SubResource("CapsuleShape3D_pu3uo")
 
 [node name="camerapoint" type="Node3D" parent="." unique_id=643985995]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.141312, 0)
 
 [node name="Camera3D" type="Camera3D" parent="camerapoint" unique_id=1933268009]
-transform = Transform3D(-1, 0, -8.742278e-08, -2.262668e-08, 0.9659258, 0.25881904, 8.444392e-08, 0.25881904, -0.9659258, 0, 5, -5)
+transform = Transform3D(-1, 1.7763568e-15, -8.742278e-08, -2.262668e-08, 0.9659259, 0.25881907, 8.444392e-08, 0.25881907, -0.9659258, 0, 2.0453467, -5)
 
 [node name="Area_dmg" type="Area3D" parent="." unique_id=821275582]
 collision_layer = 0
@@ -735,6 +738,13 @@ offset_left = 5.0
 offset_top = 31.0
 offset_right = 261.0
 offset_bottom = 92.0
+
+[node name="PauseMenu" parent="Control" unique_id=664724262 instance=ExtResource("3_mud5u")]
+visible = false
+layout_mode = 1
+
+[node name="3dProgress" parent="." unique_id=1860586944 instance=ExtResource("3_jvxg0")]
+transform = Transform3D(2.01, 0, 0, 0, 2.01, 0, 0, 0, 2.01, 0, 5.911954, 0)
 
 [connection signal="body_entered" from="Area_dmg" to="." method="_on_area_dmg_body_entered"]
 [connection signal="body_exited" from="Area_dmg" to="." method="_on_area_dmg_body_exited"]

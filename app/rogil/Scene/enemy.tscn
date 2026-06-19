@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbv5bth7i8v5r" path="res://Script/enemy.gd" id="1_4jekx"]
 [ext_resource type="AnimationLibrary" uid="uid://dxkgobfc23m6v" path="res://anim/Walking.fbx" id="2_s685e"]
+[ext_resource type="PackedScene" uid="uid://bjp3hnt0vdsdj" path="res://UI/3d_progress.tscn" id="3_s685e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbsjl"]
 resource_name = "palette.033"
@@ -594,6 +595,9 @@ debug_color = Color(0.9393875, 0.20707205, 0.35320038, 0.41960785)
 
 [node name="TimerDMG" type="Timer" parent="." unique_id=913780627]
 wait_time = 0.7
+
+[node name="3dProgress" parent="." unique_id=1860586944 instance=ExtResource("3_s685e")]
+transform = Transform3D(1.87, 0, 0, 0, 1.87, 0, 0, 0, 1.87, 0, 5.8414965, 0)
 
 [connection signal="area_entered" from="Area_dmg" to="." method="_on_area_dmg_area_entered"]
 [connection signal="area_exited" from="Area_dmg" to="." method="_on_area_dmg_area_exited"]

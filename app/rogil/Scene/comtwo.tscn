@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://c6xbhiyb0jlyh"]
 
 [ext_resource type="PackedScene" uid="uid://blfif43bla3hk" path="res://Scene/BaseCom.tscn" id="1_7fpbm"]
-[ext_resource type="PackedScene" uid="uid://decyqieq7xj67" path="res://Scene/pol.tscn" id="2_71ksn"]
 [ext_resource type="Texture2D" uid="uid://dx0w83cf3tqy7" path="res://Shader/345.png" id="2_kjj4c"]
 [ext_resource type="PackedScene" uid="uid://c4xuyiyywkhfu" path="res://Scene/point_spawn_com.tscn" id="3_fdfdl"]
-[ext_resource type="PackedScene" uid="uid://hs6kfmabw13r" path="res://Scene/Wall.tscn" id="4_737hr"]
+[ext_resource type="PackedScene" uid="uid://cna6a23tt2vh1" path="res://Scene/Doors.tscn" id="4_mctyo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ri1pd"]
 albedo_texture = ExtResource("2_kjj4c")
@@ -12,10 +11,11 @@ uv1_scale = Vector3(0.285, 0.285, 0.285)
 uv1_triplanar = true
 
 [node name="comtwo" unique_id=1711592240 instance=ExtResource("1_7fpbm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1361686, 0)
 
-[node name="CSGBox3D" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="0" unique_id=1605916659 instance=ExtResource("2_71ksn")]
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="0" unique_id=279352903]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8156557, -0.43622226, -27.66133)
+size = Vector3(55.00357, 1.1435547, 55.285786)
+material = SubResource("StandardMaterial3D_ri1pd")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="1" unique_id=460148573]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.66444, 5.62862, -0.89559126)
@@ -37,8 +37,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.788925, 5.72089, -26.96075
 size = Vector3(1.8121748, 11.174866, 53.88462)
 material = SubResource("StandardMaterial3D_ri1pd")
 
-[node name="CSGBox3D6" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="5" unique_id=722557549 instance=ExtResource("4_737hr")]
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="5" unique_id=1057553241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.349453, 5.72089, -24.335787)
+size = Vector3(1.8121748, 11.174866, 48.634693)
+material = SubResource("StandardMaterial3D_ri1pd")
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="6" unique_id=1681764091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.349453, 9.081674, -51.04788)
@@ -66,4 +68,10 @@ size = Vector3(55.07658, 11.174866, 1.7543077)
 material = SubResource("StandardMaterial3D_ri1pd")
 
 [node name="point_spawn_com" parent="pointgena" parent_id_path=PackedInt32Array(1047726006) index="0" unique_id=1229678217 instance=ExtResource("3_fdfdl")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -33.312584, 0.12142676, -51.081276)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -33.312584, 0, -51.081276)
+
+[node name="Node3D2" parent="." index="2" unique_id=347562392 instance=ExtResource("4_mctyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0031192303, 0.34035945, -0.33067393)
+
+[node name="Node3D3" parent="." index="3" unique_id=1638498718 instance=ExtResource("4_mctyo")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -32.82678, 0.34035945, -51.22008)

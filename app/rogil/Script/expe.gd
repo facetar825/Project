@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 
 # Игрок вошёл в ближнюю зону — исчезаем
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body is Plaeyr:
+	if body is Player:
 		player.add_exp(expe)
 		is_hidden = true
 		visible = false
@@ -32,12 +32,12 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 # Игрок вошёл в дальнюю зону — начинаем преследование
 func _on_area_3d_2_body_entered(body: Node3D) -> void:
-	if body is Plaeyr:
+	if body is Player:
 		player = body
 		is_chasing = true
 
 # Игрок вышел из дальней зоны — останавливаемся
 func _on_area_3d_2_body_exited(body: Node3D) -> void:
-	if body is Plaeyr:
+	if body is Player:
 		player = null
 		is_chasing = false

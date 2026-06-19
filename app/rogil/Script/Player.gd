@@ -1,5 +1,6 @@
 extends Entity
-class_name Plaeyr
+class_name Player
+@onready var _3d_progress: Node3D = $"3dProgress"
 
 @onready var animation_player: AnimationPlayer = $Idle/AnimationPlayer
 @onready var camerapoint: Node3D = $camerapoint
@@ -55,7 +56,7 @@ func _input(event: InputEvent) -> void:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 			camera_pitch = clamp(
-				camera_pitch - event.relative.y * MOUSE_SENSITIVITY,
+				camera_pitch + event.relative.y * MOUSE_SENSITIVITY,
 				deg_to_rad(CAMERA_MIN_PITCH),
 				deg_to_rad(CAMERA_MAX_PITCH)
 			)
@@ -68,10 +69,21 @@ func _input(event: InputEvent) -> void:
 				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED \
 				else Input.MOUSE_MODE_CAPTURED
 			Input.set_mouse_mode(mode)
-
+			match mode:
+				Input.MOUSE_MODE_CAPTURED:
+					hide_options()
+				Input.MOUSE_MODE_VISIBLE:
+					show_options()
 	#if event is InputEventMouseButton and event.pressed:
 		#if event.button_index == MOUSE_BUTTON_LEFT:
 			#_attack_nearest_enemy()
+
+func hide_options():
+	$Control/PauseMenu.hide()
+
+func show_options():
+	$Control/PauseMenu.show()
+
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -166,7 +178,9 @@ func update_hp_bar():
 		hp_bar.max_value = get_max_hp()
 		hp_bar.value = current_hp
 	if label_hp:
-		label_hp.text = "HP: %d / %d" % [current_hp, get_max_hp()]	
+		label_hp.text = "HP: %d / %d" % [current_hp, get_max_hp()]
+	_3d_progress.set_value(current_hp)
+	_3d_progress.set_max_value(max_hp)
 func take_damage(amount: int) -> void:
 	super.take_damage(amount)
 	update_hp_bar()

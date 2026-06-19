@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://iqoo5sdivqnq" path="res://3d/Cust/cust4.fbx" id="19_ahfhc"]
 [ext_resource type="PackedScene" uid="uid://b26ct1k8dtw0e" path="res://3d/Cust/cust5.fbx" id="20_uindm"]
 [ext_resource type="PackedScene" uid="uid://ojdwyfd6rkdp" path="res://Scene/expe.tscn" id="21_rhxv3"]
-[ext_resource type="PackedScene" uid="uid://cvwdntwr0irl3" path="res://Scene/Plaeyr.tscn" id="22_rxy57"]
+[ext_resource type="PackedScene" uid="uid://cvwdntwr0irl3" path="res://Scene/Player.tscn" id="22_rxy57"]
 [ext_resource type="PackedScene" uid="uid://dnp442ese7x6x" path="res://Scene/enemy.tscn" id="23_pt3qq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3vi7k"]

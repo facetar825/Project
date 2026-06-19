@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c2313gx1aj3m8"]
 
 [ext_resource type="Script" uid="uid://dhp7xixuclmwp" path="res://Script/dangen.gd" id="1_fuwo4"]
-[ext_resource type="PackedScene" uid="uid://cvwdntwr0irl3" path="res://Scene/Plaeyr.tscn" id="1_lskql"]
+[ext_resource type="PackedScene" uid="uid://cvwdntwr0irl3" path="res://Scene/Player.tscn" id="1_lskql"]
 [ext_resource type="PackedScene" uid="uid://d3e53uiimhdua" path="res://Scene/com_one.tscn" id="3_43v6x"]
 
 [node name="Node3D" type="Node3D" unique_id=2063548034]
@@ -10,4 +10,4 @@ script = ExtResource("1_fuwo4")
 [node name="CharacterBody3D" parent="." unique_id=750457174 instance=ExtResource("1_lskql")]
 
 [node name="comOne" parent="." unique_id=1711592240 instance=ExtResource("3_43v6x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54832685, -0.45875612, -3.2982836)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8493304, 0, 1.4776893)

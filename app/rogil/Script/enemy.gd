@@ -1,5 +1,6 @@
 extends Entity
 class_name Enemy
+@onready var _3d_progress: Node3D = $"3dProgress"
 
 @onready var skin: Node3D = $Skin
 @onready var animation_player: AnimationPlayer = $Skin/AnimationPlayer
@@ -12,13 +13,19 @@ const ROTATION_SPEED = 5.0
 var player: Entity = null
 var player_in_range: bool = false
 
+
+func take_damage(amount: int) -> void:
+	super.take_damage(amount)
+	_3d_progress.set_value
+	(current_hp)
+
 func _ready() -> void:
 	super._ready()
 	add_to_group("enemy")
 	player = get_tree().get_first_node_in_group("player")
 	area_dmg.body_entered.connect(_on_area_dmg_body_entered)
 	area_dmg.body_exited.connect(_on_area_dmg_body_exited)
-
+	_3d_progress.set_max_value(max_hp)
 
 func _physics_process(delta: float) -> void:
 	if player_in_range:
