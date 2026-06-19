@@ -31,7 +31,7 @@ class_name Player
 const WALK_SPEED = 20.0   # нормальная скорость (подберите на глаз)
 const ACCELERATION = 10.0
 const FRICTION = 20.0
-const MOUSE_SENSITIVITY = 0.003
+const MOUSE_SENSITIVITY = 0.006
 const CAMERA_MIN_PITCH = -60.0
 const CAMERA_MAX_PITCH = 75.0
 const MODEL_ROTATION_SPEED = 10.0
@@ -54,9 +54,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
+			rotate_y(-event.relative.x * MOUSE_SENSITIVITY * SettingsManager.mouse_sensitivity)
 			camera_pitch = clamp(
-				camera_pitch + event.relative.y * MOUSE_SENSITIVITY,
+				camera_pitch + event.relative.y * MOUSE_SENSITIVITY * SettingsManager.mouse_sensitivity,
 				deg_to_rad(CAMERA_MIN_PITCH),
 				deg_to_rad(CAMERA_MAX_PITCH)
 			)
