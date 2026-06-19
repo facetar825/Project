@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cna6a23tt2vh1"]
+
+[ext_resource type="Texture2D" uid="uid://b0kvduuorhk0u" path="res://Shader/11ac973235c3d7736fad3f9e04e753a1.jpg" id="1_oa64l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5hjf5"]
+albedo_texture = ExtResource("1_oa64l")
+
+[sub_resource type="BoxMesh" id="BoxMesh_jyo4f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltu5o"]
+albedo_texture = ExtResource("1_oa64l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlfe8"]
+albedo_texture = ExtResource("1_oa64l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_04knp"]
+albedo_texture = ExtResource("1_oa64l")
+
+[node name="Node3D" type="Node3D" unique_id=347562392]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=2107916101]
+transform = Transform3D(0.42000002, 0, 0, 0, 6.6596975, 0, 0, 0, 0.5905031, -2.1910367, 3.1900945, 0)
+material_override = SubResource("StandardMaterial3D_5hjf5")
+use_collision = true
+mesh = SubResource("BoxMesh_jyo4f")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=833169102]
+transform = Transform3D(0.42000002, 0, 0, 0, 6.6596975, 0, 0, 0, 0.5905031, 2.1754508, 3.1900945, 0)
+material_override = SubResource("StandardMaterial3D_ltu5o")
+use_collision = true
+mesh = SubResource("BoxMesh_jyo4f")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="." unique_id=1788784915]
+transform = Transform3D(4.710176, 0, 0, 0, 0.32255888, 0, 0, 0, 0.5944751, 0.0033944845, -0.18707848, -0.006447196)
+material_override = SubResource("StandardMaterial3D_dlfe8")
+use_collision = true
+mesh = SubResource("BoxMesh_jyo4f")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="." unique_id=1391673430]
+transform = Transform3D(4.710176, 0, 0, 0, 0.32255888, 0, 0, 0, 0.5944751, 0.0033944845, 6.3960514, -0.006447196)
+material_override = SubResource("StandardMaterial3D_04knp")
+use_collision = true
+mesh = SubResource("BoxMesh_jyo4f")

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://41wxl238kxw7"]
+
+[ext_resource type="Shader" uid="uid://modwbr888m4s" path="res://Shader/trava2.gdshader" id="1_mwche"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phoyf"]
+render_priority = 0
+shader = ExtResource("1_mwche")
+shader_parameter/grass_color = Vector3(0.25, 0.7, 0.2)
+shader_parameter/dirt_color = Vector3(0.2, 0.15, 0.08)
+
+[node name="Node3D" type="Node3D" unique_id=775293986]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1502375634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8978577, 0, 0.90771484)
+size = Vector3(19.36615, 1, 2.8154297)
+material = SubResource("ShaderMaterial_phoyf")

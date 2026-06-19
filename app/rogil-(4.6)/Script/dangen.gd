@@ -14,5 +14,5 @@ func _process(delta: float) -> void:
 	pass
 func startgen():
 	await get_tree().create_timer(1).timeout
-	com_one.startgen(10)
+	com_one.startgen(2)
 	pass

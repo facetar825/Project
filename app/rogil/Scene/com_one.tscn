@@ -1,38 +1,28 @@
 [gd_scene format=3 uid="uid://d3e53uiimhdua"]
 
 [ext_resource type="PackedScene" uid="uid://blfif43bla3hk" path="res://Scene/BaseCom.tscn" id="1_7luns"]
-[ext_resource type="Texture2D" uid="uid://dx0w83cf3tqy7" path="res://Shader/345.png" id="2_j6p3s"]
+[ext_resource type="PackedScene" uid="uid://hs6kfmabw13r" path="res://Scene/Wall.tscn" id="2_lh3uk"]
+[ext_resource type="PackedScene" uid="uid://decyqieq7xj67" path="res://Scene/pol.tscn" id="3_0rjrd"]
 [ext_resource type="PackedScene" uid="uid://c4xuyiyywkhfu" path="res://Scene/point_spawn_com.tscn" id="3_ioi1c"]
-[ext_resource type="PackedScene" uid="uid://cna6a23tt2vh1" path="res://Scene/Doors.tscn" id="4_lh3uk"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b65bf"]
-albedo_texture = ExtResource("2_j6p3s")
 
 [node name="comOne" unique_id=1711592240 instance=ExtResource("1_7luns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48413396, 0)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="0" unique_id=574155296]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020023346, -0.54008335, 3.396276)
-size = Vector3(12.693642, 1, 14.361053)
-material = SubResource("StandardMaterial3D_b65bf")
+[node name="CSGBox3D6" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="0" unique_id=722557549 instance=ExtResource("2_lh3uk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.236453, 5.547349, 3.372984)
+size = Vector3(1.8121748, 11.174866, 14.296377)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="1" unique_id=20899717]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.572975, 3.514894, 3.396276)
-size = Vector3(1.6915474, 7.3789063, 14.361053)
-material = SubResource("StandardMaterial3D_b65bf")
+[node name="CSGBox3D8" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="1" unique_id=1802525976 instance=ExtResource("2_lh3uk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23794234, 5.547349, 9.4710045)
+size = Vector3(6.7529097, 11.174866, 2.100337)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="2" unique_id=459567956]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.476633, 3.514894, 3.396276)
-size = Vector3(1.6915474, 7.3789063, 14.361053)
-material = SubResource("StandardMaterial3D_b65bf")
+[node name="CSGBox3D7" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="2" unique_id=520859683 instance=ExtResource("2_lh3uk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4447181, 5.547349, 3.4139996)
+size = Vector3(1.8121748, 11.174866, 14.214346)
+
+[node name="CSGBox3D" parent="CSGCombiner3D" parent_id_path=PackedInt32Array(1468433768) index="3" unique_id=1605916659 instance=ExtResource("3_0rjrd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.059543133, -0.06135559, 3.4299974)
+size = Vector3(4.7396746, 1.0208435, 14.653721)
 
 [node name="point_spawn_com" parent="pointgena" parent_id_path=PackedInt32Array(1047726006) index="0" unique_id=1229678217 instance=ExtResource("3_ioi1c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.8679533)
-
-[node name="point_spawn_com2" parent="pointgena" parent_id_path=PackedInt32Array(1047726006) index="1" unique_id=1543188422 instance=ExtResource("3_ioi1c")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 10.668414)
-
-[node name="Node3D" parent="." index="2" unique_id=347562392 instance=ExtResource("4_lh3uk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03188336, 0.30936992, -3.502514)
-
-[node name="Node3D2" parent="." index="3" unique_id=447387827 instance=ExtResource("4_lh3uk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03188336, 0.24545228, 10.274671)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43733364, -3.8679533)

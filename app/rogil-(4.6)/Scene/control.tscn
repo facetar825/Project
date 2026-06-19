@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bjtfvym67fw8i"]
+
+[ext_resource type="Script" uid="uid://bojnmethobayy" path="res://Script/Main_menu.gd" id="1_0ve60"]
+
+[node name="Control" type="Control" unique_id=1964314909]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ve60")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=477750485]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=2086472640]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel" unique_id=89330220]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -171.0
+offset_top = 105.0
+offset_right = 170.0
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="MarginContainer/Panel/VBoxContainer" unique_id=1913380642]
+layout_mode = 2
+text = "Играть"
+
+[node name="Option" type="Button" parent="MarginContainer/Panel/VBoxContainer" unique_id=872467016]
+layout_mode = 2
+text = "Настройки"
+
+[node name="Exit" type="Button" parent="MarginContainer/Panel/VBoxContainer" unique_id=728174355]
+layout_mode = 2
+text = "Выйти"
+
+[node name="Progress" type="Button" parent="MarginContainer/Panel" unique_id=684007972]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -131.0
+offset_bottom = 103.0
+grow_horizontal = 0
+text = "Достижения"

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://blfif43bla3hk"]
+
+[ext_resource type="Script" uid="uid://bqsgxg16dhldd" path="res://Script/base_com.gd" id="1_xre0c"]
+
+[node name="basecom" type="Node3D" unique_id=1711592240]
+script = ExtResource("1_xre0c")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1468433768]
+use_collision = true
+
+[node name="pointgena" type="Node3D" parent="." unique_id=1047726006]
