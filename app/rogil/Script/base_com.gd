@@ -8,14 +8,14 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func startgen(n):
+func startgen(n: int) -> void:
 	for point in pointgena.get_children():
-		
-		var room = Global.get_room().instantiate()
-
-		get_tree().current_scene.add_child(room)
-
+		var room = Global.get_room().instantiate()   # исправлено instantiate
+		# Добавляем комнату как дочернюю к текущей (чтобы сохранить иерархию)
+		add_child(room)
+		# Устанавливаем позицию в соответствии с точкой
 		room.global_transform = point.global_transform
+		
 		if n > 1:
 			room.startgen(n - 1)
 		

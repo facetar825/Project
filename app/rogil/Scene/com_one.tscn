@@ -26,7 +26,7 @@ size = Vector3(1.6915474, 7.3789063, 14.361053)
 material = SubResource("StandardMaterial3D_b65bf")
 
 [node name="point_spawn_com" parent="pointgena" parent_id_path=PackedInt32Array(1047726006) index="0" unique_id=1229678217 instance=ExtResource("3_ioi1c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.8679533)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03810823, -3.8679533)
 
 [node name="point_spawn_com2" parent="pointgena" parent_id_path=PackedInt32Array(1047726006) index="1" unique_id=1543188422 instance=ExtResource("3_ioi1c")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 10.668414)
