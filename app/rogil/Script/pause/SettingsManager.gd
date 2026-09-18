@@ -1,7 +1,7 @@
 extends Node
 
 # ---------- Настройки (значения по умолчанию) ----------
-var resolution: Vector2i = Vector2i(1920, 1080)
+var resolution: Vector2i = Vector2i(1280, 720)
 var shadow_quality: int = 2          # 0=Off, 1=Low, 2=Medium, 3=High
 var light_quality: int = 2           # 0=Low, 1=Medium, 2=High
 var master_volume: float = 0.8       # 0.0 .. 1.0
@@ -26,7 +26,7 @@ func load_settings() -> void:
 	if config.load(SETTINGS_PATH) != OK:
 		return
 
-	var res_str = config.get_value("Video", "resolution", "1920x1080")
+	var res_str = config.get_value("Video", "resolution", "1280x720")
 	var parts = res_str.split("x")
 	if parts.size() == 2:
 		resolution = Vector2i(int(parts[0]), int(parts[1]))

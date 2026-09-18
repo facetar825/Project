@@ -10,16 +10,21 @@ config_version=5
 
 [application]
 
-config/name="rogil"
-run/main_scene="res://Scene/Map.tscn"
-config/features=PackedStringArray("4.7", "Forward Plus")
+config/name="Rogil — Зал трёх печатей"
+run/main_scene="res://Scene/Floor.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://Shader/icon.svg"
 
 [autoload]
 
-Skill="*uid://c0ailttp1v5qy"
-Global="*uid://tiuklewf2a3y"
-SettingsManager="*uid://dyqtc7c7vmhdq"
+Global="*res://Script/Global.gd"
+SettingsManager="*res://Script/pause/SettingsManager.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 
 [filesystem]
 
@@ -64,4 +69,5 @@ sprint={
 
 [rendering]
 
-rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

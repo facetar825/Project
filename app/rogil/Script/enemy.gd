@@ -16,8 +16,7 @@ var player_in_range: bool = false
 
 func take_damage(amount: int) -> void:
 	super.take_damage(amount)
-	_3d_progress.set_value
-	(current_hp)
+	_3d_progress.set_value(current_hp)
 
 func _ready() -> void:
 	super._ready()
