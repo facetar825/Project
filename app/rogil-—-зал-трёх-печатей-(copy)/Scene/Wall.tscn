@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://hs6kfmabw13r"]
+
+[ext_resource type="Texture2D" uid="uid://dx0w83cf3tqy7" path="res://Shader/345.png" id="1_uxhnn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ri1pd"]
+albedo_texture = ExtResource("1_uxhnn")
+uv1_scale = Vector3(0.285, 0.285, 0.285)
+uv1_triplanar = true
+
+[node name="CSGBox3D6" type="CSGBox3D" unique_id=722557549]
+size = Vector3(1.8121748, 11.174866, 48.634693)
+material = SubResource("StandardMaterial3D_ri1pd")

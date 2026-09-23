@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Script/floor/dungeon.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Scene/com_one.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Scene/room_4.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Scene/roomtree.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://Scene/comtwo.tscn" id="5"]
+
+[node name="PresetDungeon" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Entrance" parent="." instance=ExtResource("2")]
+
+[node name="Gallery" parent="." instance=ExtResource("3")]
+position = Vector3(0, 0, -3.8679533)
+
+[node name="Hall" parent="." instance=ExtResource("4")]
+position = Vector3(53.165424, 0, -22.94213)
+
+[node name="Maze" parent="." instance=ExtResource("5")]
+position = Vector3(53.09085, 0, -78.71704)
+
+[node name="GuardianHall" parent="." instance=ExtResource("4")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 19.77827, 0, -129.79832)

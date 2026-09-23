@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cpf0ghvo71nlv"]
+
+[ext_resource type="Shader" uid="uid://modwbr888m4s" path="res://Shader/trava2.gdshader" id="1_rqskn"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_rqskn")
+shader_parameter/grass_color = Vector3(0.33, 0.7, 0.2)
+shader_parameter/dirt_color = Vector3(0.2, 0.15, 0.08)
