@@ -57,6 +57,8 @@ func apply_all_settings() -> void:
 
 # ---------- Отдельные применения ----------
 func apply_display_settings() -> void:
+	if OS.has_feature("mobile"):
+		return
 	DisplayServer.window_set_size(resolution)
 
 	match display_mode:
@@ -81,7 +83,7 @@ func apply_shadow_settings() -> void:
 			continue
 			
 		# Включаем/выключаем тени
-		light.shadow_enabled = (shadow_quality > 0)
+		light.shadow_enabled = (shadow_quality > 0) and not OS.has_feature("mobile")
 		
 		if shadow_quality > 0:
 			# Настраиваем качество теней

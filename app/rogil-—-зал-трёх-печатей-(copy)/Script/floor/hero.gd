@@ -76,10 +76,15 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if game.mode != "playing" or not game.dungeon.ready_for_play:
 		return
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		pivot.rotation.y -= event.relative.x * 0.003
-		pitch = clampf(pitch - event.relative.y * 0.003, -1.15, -0.12)
-		pivot.rotation.x = pitch
+	if not game.mobile_controls and event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		rotate_camera(event.relative * 0.003)
+
+func rotate_camera(delta: Vector2) -> void:
+	if game.mode != "playing" or not game.dungeon.ready_for_play:
+		return
+	pivot.rotation.y -= delta.x
+	pitch = clampf(pitch - delta.y, -1.15, -0.12)
+	pivot.rotation.x = pitch
 
 func _physics_process(delta: float) -> void:
 	if game.mode != "playing" or not game.dungeon.ready_for_play:
@@ -89,10 +94,16 @@ func _physics_process(delta: float) -> void:
 	dash_cooldown = maxf(0, dash_cooldown - delta)
 	dash_time -= delta
 	var input := Input.get_vector("left", "right", "up", "down")
+	var touch_dash := false
+	var touch_jump := false
+	if is_instance_valid(game.touch_controls):
+		input = (input + game.touch_controls.movement).limit_length(1.0)
+		touch_dash = game.touch_controls.consume_dash()
+		touch_jump = game.touch_controls.consume_jump()
 	var direction := pivot.basis * Vector3(input.x, 0, input.y)
 	direction.y = 0
-	direction = direction.normalized()
-	if Input.is_action_just_pressed("sprint") and dash_cooldown <= 0:
+	direction = direction.normalized() * input.length()
+	if (Input.is_action_just_pressed("sprint") or touch_dash) and dash_cooldown <= 0:
 		dash_direction = direction if direction.length() > 0.1 else -pivot.basis.z
 		dash_direction.y = 0
 		dash_direction = dash_direction.normalized()
@@ -107,7 +118,7 @@ func _physics_process(delta: float) -> void:
 	velocity.y -= 24 * delta
 	if is_on_floor():
 		velocity.y = 0
-		if Input.is_physical_key_pressed(KEY_SPACE):
+		if Input.is_physical_key_pressed(KEY_SPACE) or touch_jump:
 			velocity.y = 8
 	move_and_slide()
 	if position.y < -8:

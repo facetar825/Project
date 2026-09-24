@@ -1,6 +1,7 @@
 extends Node3D
 ## Один законченный забег: три печати, страж, выход.
 const Visuals = preload("res://Script/floor/visuals.gd")
+const TouchControls = preload("res://Script/floor/touch_controls.gd")
 const Hero = preload("res://Script/floor/hero.gd")
 const Foe = preload("res://Script/floor/foe.gd")
 const Dungeon = preload("res://Script/floor/dungeon.gd")
@@ -15,6 +16,8 @@ const UPGRADES := [
 	["ДЛИННОЕ ЛЕЗВИЕ", "+0,6 м к радиусу атаки", "range"],
 	["ЛЁГКИЙ ШАГ", "+0,7 к скорости движения", "speed"],
 ]
+var mobile_controls := OS.has_feature("mobile") or "--mobile-controls" in OS.get_cmdline_user_args()
+var touch_controls: Control
 var hero: CharacterBody3D
 var mode := "menu"
 var stage := 0
@@ -42,6 +45,10 @@ var message: Label
 var rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
+	get_tree().auto_accept_quit = not OS.has_feature("android")
+	if mobile_controls:
+		get_tree().quit_on_go_back = false
+		get_tree().root.go_back_requested.connect(toggle_pause)
 	rng.randomize()
 	build_world()
 	hero = Hero.new()
@@ -66,7 +73,7 @@ func build_world() -> void:
 	sun.rotation_degrees = Vector3(-55, -25, 0)
 	sun.light_color = Color("b9d4e0")
 	sun.light_energy = 0.65
-	sun.shadow_enabled = true
+	sun.shadow_enabled = not mobile_controls
 	add_child(sun)
 	dungeon = DungeonScene.instantiate()
 	add_child(dungeon)
@@ -118,6 +125,8 @@ func build_ui() -> void:
 	theme.set_stylebox("focus", "Button", hover)
 	theme.set_stylebox("pressed", "Button", hover)
 	root.theme = theme
+	if mobile_controls:
+		theme.default_font_size = 24
 	var heading := VBoxContainer.new()
 	heading.position = Vector2(30, 24)
 	heading.add_theme_constant_override("separation", 8)
@@ -125,6 +134,10 @@ func build_ui() -> void:
 	root.add_child(heading)
 	heading.add_child(label("R O G I L     /     ЭТАЖ I", 17, AMBER))
 	objective = label("", 19, Color("e0e2db"))
+	if mobile_controls:
+		heading.position.x = 60
+		objective.custom_minimum_size.x = 880
+		objective.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	heading.add_child(objective)
 	boss_bar = progress(AMBER, 7)
 	boss_bar.custom_minimum_size.x = 500
@@ -139,11 +152,17 @@ func build_ui() -> void:
 	hud.offset_bottom = -46
 	hud.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(hud)
+	if mobile_controls:
+		hud.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+		hud.position = Vector2(60, 115)
+		hud.size = Vector2(850, 80)
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 7)
 	hud.add_child(column)
 	stats = label("", 15, Color("c5d3d5"))
 	column.add_child(stats)
+	if mobile_controls:
+		stats.add_theme_font_size_override("font_size", 22)
 	hp_bar = progress(Color("bd6f61"), 13)
 	hp_bar.custom_minimum_size.x = 350
 	hp_bar.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
@@ -157,6 +176,13 @@ func build_ui() -> void:
 	message.offset_top = -28
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	root.add_child(message)
+	if mobile_controls:
+		message.hide()
+		touch_controls = TouchControls.new()
+		root.add_child(touch_controls)
+		touch_controls.look_changed.connect(hero.rotate_camera)
+		touch_controls.pause_requested.connect(toggle_pause)
+		touch_controls.set_active(false)
 	overlay = ColorRect.new()
 	overlay.color = Color(0.015, 0.025, 0.035, 0.74)
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -209,6 +235,8 @@ func clear_modal(heading: String, subtitle: String) -> void:
 	for child in modal.get_children():
 		modal.remove_child(child)
 		child.queue_free()
+	if is_instance_valid(touch_controls):
+		touch_controls.set_active(false)
 	overlay.show()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	modal.add_child(label("ЭТАЖ 01    /    ЗАБЫТОЕ СВЯТИЛИЩЕ", 16, TEAL))
@@ -227,6 +255,8 @@ func show_menu() -> void:
 	mode = "menu"
 	hud.hide()
 	clear_modal("ДАНЖ ТРЁХ ПЕЧАТЕЙ", "Галерея → каменный зал → лабиринт → страж.\n\nЗачищай комнаты, чтобы открывать проход дальше.\nСобирай опыт и выбирай улучшения. После босса\nвойди в портал. Атака работает автоматически.")
+	if mobile_controls:
+		modal.add_child(label("Слева — джойстик. Справа — поворот камеры.\nПрыжок и рывок — кнопки на экране.", 18, TEAL))
 	button("НАЧАТЬ ЗАБЕГ", start_run)
 	button("ВЫЙТИ", func(): get_tree().quit())
 
@@ -234,7 +264,9 @@ func start_run() -> void:
 	mode = "playing"
 	overlay.hide()
 	hud.show()
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if mobile_controls else Input.MOUSE_MODE_CAPTURED
+	if is_instance_valid(touch_controls):
+		touch_controls.set_active(true)
 	waiting_for_entry = true
 	objective.text = "ВОЙДИ В ГАЛЕРЕЮ   ·   Первая дверь впереди"
 
@@ -331,6 +363,8 @@ func enemy_killed(enemy: CharacterBody3D) -> void:
 	gems.append(gem)
 
 func update_hud() -> void:
+	if is_instance_valid(touch_controls):
+		touch_controls.dash_cooldown = hero.dash_cooldown
 	hp_bar.max_value = hero.max_hp
 	hp_bar.value = hero.hp
 	xp_bar.max_value = hero.next_xp
@@ -370,19 +404,31 @@ func apply_upgrade(id: String) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		toggle_pause()
+
+func toggle_pause() -> void:
+	if mode == "playing":
+		mode = "pause"
+		clear_modal("ПАУЗА", "Передохни. Испытание подождёт.")
+		button("ПРОДОЛЖИТЬ", resume)
+		button("НАЧАТЬ ЗАНОВО", restart)
+		button("В ГЛАВНОЕ МЕНЮ", func(): get_tree().reload_current_scene())
+	elif mode == "pause":
+		resume()
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_PAUSED or (mobile_controls and what == NOTIFICATION_APPLICATION_FOCUS_OUT):
+		if is_instance_valid(touch_controls):
+			touch_controls.reset_input()
 		if mode == "playing":
-			mode = "pause"
-			clear_modal("ПАУЗА", "Передохни. Испытание подождёт.")
-			button("ПРОДОЛЖИТЬ", resume)
-			button("НАЧАТЬ ЗАНОВО", restart)
-			button("В ГЛАВНОЕ МЕНЮ", func(): get_tree().reload_current_scene())
-		elif mode == "pause":
-			resume()
+			toggle_pause()
 
 func resume() -> void:
 	mode = "playing"
 	overlay.hide()
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if mobile_controls else Input.MOUSE_MODE_CAPTURED
+	if is_instance_valid(touch_controls):
+		touch_controls.set_active(true)
 
 func finish(won: bool) -> void:
 	mode = "victory" if won else "defeat"
