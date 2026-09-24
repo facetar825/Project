@@ -99,7 +99,9 @@ func set_gate(index: int, closed: bool) -> void:
 
 func entered_room(index: int, point: Vector3) -> bool:
 	var local := rooms[index].to_local(point)
-	return local.z < -3.3 and local.z > -8 and absf(local.x) < 2.0
+	# Проверяем всю внутреннюю область, а не узкую полосу у двери:
+	# игрок может пройти сбоку или пересечь полосу рывком между кадрами.
+	return local.z < -3.3 and absf(local.y) < 4.0 and contains_point(index, point, 0.4)
 
 func checkpoint(index: int) -> Vector3:
 	return rooms[index].to_global(Vector3(0, 0.35, -5))
