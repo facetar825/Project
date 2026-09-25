@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ojdwyfd6rkdp"]
+
+[ext_resource type="Script" uid="uid://ceqsd6j2ravin" path="res://Script/expe.gd" id="1_otvv7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qo0f2"]
+radius = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kxy7e"]
+radius = 8.0
+
+[node name="Node3D" type="Node3D" unique_id=1203291702]
+script = ExtResource("1_otvv7")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=849262199]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=232543999]
+shape = SubResource("SphereShape3D_qo0f2")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=819335528]
+
+[node name="Area3D2" type="Area3D" parent="." unique_id=1307538811]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=975845068]
+shape = SubResource("SphereShape3D_kxy7e")
+debug_color = Color(0.32987282, 0.6153293, 0.29656127, 0.41960785)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]
